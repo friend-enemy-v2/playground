@@ -1,6 +1,6 @@
 # Learning Log
 
-Record durable understanding here after each lab.
+Record durable understanding here after each exercise.
 
 This should become a personal reference, not a chronological diary.
 Prefer short explanations in your own words.
@@ -50,4 +50,4 @@ Record incorrect assumptions and the corrected mental model here.
 
 ## Questions to Revisit
 
-- Rubyオブジェクトのメモリ配置とGCは後のMemory / OS・GCラボで掘り下げる。
+- Rubyオブジェクトのメモリ配置とGCは後のMemory / OS・GCの学習で掘り下げる。

@@ -30,7 +30,7 @@ Act as both an implementation engineer and a technical tutor.
 You may write most or all implementation code.
 Do not require manual boilerplate or syntax memorization for its own sake.
 
-A program running successfully is not the end of a lab.
+A program running successfully is not the end of a exercise.
 Understanding the mechanism is the goal.
 
 ## Implementation
@@ -90,7 +90,7 @@ Use small experiments to expose failure modes where useful:
 - duplicate requests
 - timeout
 - corrupted data
-- unavailable dependencies
+- unavaiexercisele dependencies
 
 Explain why the failure occurs and how production systems mitigate it.
 
@@ -106,9 +106,9 @@ Compare equivalent concepts when useful:
 
 Explicitly point out what each language/runtime handles automatically.
 
-## Lab Workflow
+## Learning Workflow
 
-For each lab:
+For each exercise:
 
 1. state one clear learning objective
 2. implement the smallest working version
@@ -116,16 +116,16 @@ For each lab:
 4. explain the mechanism
 5. perform at least one useful edge-case or failure experiment
 6. explain production differences
-7. create/update the lab README
+7. create/update the exercise README
 8. append durable lessons to `docs/learning.md`
 9. update `docs/roadmap.md` when progress changes
 
-Do not automatically start the next lab. The user decides when to continue.
+Do not automatically start the next exercise. The user decides when to continue.
 
 ## Scope
 
-Labs should stay small and focused.
-Do not turn a learning lab into a production application.
+Exercises should stay small and focused.
+Do not turn a learning exercise into a production application.
 
 Larger integrations belong in `projects/`, such as:
 
@@ -140,11 +140,31 @@ Use environment variables and `.env.example` when needed.
 
 Do not commit generated build artifacts.
 
+## Repository Structure
+
+Organize exercises primarily by technical domain, not by programming language.
+
+Use directories such as:
+
+- `basics/`
+- `network/`
+- `database/`
+- `concurrency/`
+- `distributed/`
+- `search/`
+- `projects/`
+- `docs/`
+
+Create a directory only when it is needed. Include the language in the exercise directory name when useful, for example `network/ruby-tcp-echo/`.
+
 ## Documentation
 
-Markdown under `docs/` is the source of truth for learning documentation.
+Markdown under `docs/` is the source of truth for durable learning notes.
 
-Keep it compatible with a future static documentation site such as VitePress.
+Keep READMEs and pull request descriptions concise. Assume the user can generally read code; explain mechanisms or language-specific constructs when they are actually unclear.
+
+Do not add diagrams by default. When the user asks for a visual explanation, choose between plain Markdown, Mermaid, HTML, or a documentation site based on what is easiest to understand for that specific topic.
+
 Do not introduce VitePress until it is useful.
 
 ## User Learning Preference
