@@ -6,7 +6,7 @@ The roadmap is intentionally flexible. Small experiments may be inserted when a 
 
 ## Phase 1 - Ruby / Web Fundamentals
 
-- [ ] 01 CLI Todo
+- [x] 01 CLI Todo
 - [ ] 02 TCP Echo Server
 - [ ] 03 HTTP Server
 - [ ] 04 REST API
