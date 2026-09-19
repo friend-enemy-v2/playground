@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Ruby
+.bundle/
+vendor/bundle/
+*.gem
+
+# Java
+.gradle/
+build/
+target/
+*.class
+
+# C
+*.o
+*.out
+*.exe
+
+# IDE
+.idea/
+.vscode/
+
+# Logs / temp
+*.log
+tmp/
