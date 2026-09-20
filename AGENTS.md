@@ -90,7 +90,7 @@ Use small experiments to expose failure modes where useful:
 - duplicate requests
 - timeout
 - corrupted data
-- unavaiexercisele dependencies
+- unavailable dependencies
 
 Explain why the failure occurs and how production systems mitigate it.
 
@@ -142,20 +142,24 @@ Do not commit generated build artifacts.
 
 ## Repository Structure
 
-Organize exercises primarily by technical domain, not by programming language.
+Keep learning exercises at the repository root so they can be read in study order.
 
-Use directories such as:
+Name them with:
 
-- `basics/`
-- `network/`
-- `database/`
-- `concurrency/`
-- `distributed/`
-- `search/`
-- `projects/`
-- `docs/`
+`NN-language-domain-topic`
 
-Create a directory only when it is needed. Include the language in the exercise directory name when useful, for example `network/ruby-tcp-echo/`.
+Examples:
+
+- `01-ruby-cli-todo/`
+- `02-ruby-network-tcp-echo/`
+- `03-ruby-network-http-server/`
+- `04-ruby-web-rest-api/`
+
+Omit a language or domain segment when it does not help identify the topic.
+
+Use short descriptive branch names such as `tcp-echo-server`. Do not add Git Flow prefixes such as `feature/` or `fix/`.
+
+Use plain commit messages such as `Add TCP echo server`. Do not add conventional-commit prefixes such as `feat:` or `fix:`.
 
 ## Documentation
 
