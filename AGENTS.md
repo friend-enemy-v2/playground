@@ -161,6 +161,12 @@ Use short descriptive branch names such as `tcp-echo-server`. Do not add Git Flo
 
 Use plain commit messages such as `Add TCP echo server`. Do not add conventional-commit prefixes such as `feat:` or `fix:`.
 
+### GitHub Workflow
+
+- The user performs the final merge. Do not merge pull requests on the user's behalf unless they explicitly override this rule for a specific PR.
+- When responding to a GitHub pull request review comment, reply directly to that review comment/thread. Do not substitute a general pull request or issue comment when a threaded reply is intended.
+- Repository-rule-only changes may be committed and pushed directly to `main` when the user explicitly permits it. Otherwise, use the normal branch and pull request workflow.
+
 ## Documentation
 
 Markdown under `docs/` is the source of truth for durable learning notes.
