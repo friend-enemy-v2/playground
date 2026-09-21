@@ -165,6 +165,9 @@ Use plain commit messages such as `Add TCP echo server`. Do not add conventional
 
 - The user performs the final merge. Do not merge pull requests on the user's behalf unless they explicitly override this rule for a specific PR.
 - When responding to a GitHub pull request review comment, reply directly to that review comment/thread. Do not substitute a general pull request or issue comment when a threaded reply is intended.
+- Before handling pull request review feedback, read `AGENTS.md` and follow the repository workflow rules.
+- When the user says they commented on a pull request (for example, "コメントした"), treat it as a request to inspect those review comments and reply directly in the corresponding GitHub review threads unless the user explicitly asks for an answer in chat instead.
+- Prefix AI-authored replies to GitHub review comments with `[AI]` so they are distinguishable from the user's comments when both use the same GitHub account.
 - Repository-rule-only changes may be committed and pushed directly to `main` when the user explicitly permits it. Otherwise, use the normal branch and pull request workflow.
 
 ## Documentation
