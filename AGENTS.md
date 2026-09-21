@@ -170,6 +170,7 @@ Use plain commit messages such as `Add TCP echo server`. Do not add conventional
 - Prefix all AI-authored GitHub text with `[AI]` so it is distinguishable from the user's work when both use the same GitHub account. This includes pull request titles/descriptions, issue titles/bodies, review comments/replies, general PR comments, and commit messages.
 - Group commits by meaningful change, not by file. A commit may contain multiple related files when they form one coherent implementation or documentation change.
 - Do not create one commit per file unless the files are genuinely independent changes.
+- File writing and Git commits are separate concerns. If a tool or API cannot safely write many files in one operation, write files in smaller batches as needed, then group the resulting related changes into one meaningful commit. Do not turn write-operation limits or batch-write errors into one-file-per-commit history.
 - File write/update operations and Git commits are separate concerns. A limitation or error when writing multiple files at once does not require one commit per file.
 - If multiple related files cannot be written in one operation, write/update them in smaller batches or individually as needed, then group the completed related changes into one meaningful commit whenever the GitHub tooling allows it.
 - Repository-rule-only changes may be committed and pushed directly to `main` when the user explicitly permits it. Otherwise, use the normal branch and pull request workflow.
