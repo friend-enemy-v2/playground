@@ -7,13 +7,13 @@ The roadmap is intentionally flexible. Small experiments may be inserted when a 
 ## Phase 1 - Ruby / Web Fundamentals
 
 - [x] 01 CLI Todo
-- [ ] 02 TCP Echo Server
-- [ ] 03 HTTP Server
-- [ ] 04 REST API
-- [ ] 05 SQLite Todo API
-- [ ] 06 Login API
-- [ ] 07 Mini SNS
-- [ ] 08 Rails Mini SNS
+- [x] 02 TCP Echo Server
+- [x] 03 HTTP Server
+- [x] 04 REST API
+- [x] 05 SQLite Todo API
+- [x] 06 Login API
+- [x] 07 Mini SNS
+- [x] 08 Rails Mini SNS
 
 Understand Ruby basics as needed rather than studying syntax separately for a long period.
 
