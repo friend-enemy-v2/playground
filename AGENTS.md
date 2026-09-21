@@ -167,7 +167,9 @@ Use plain commit messages such as `Add TCP echo server`. Do not add conventional
 - When responding to a GitHub pull request review comment, reply directly to that review comment/thread. Do not substitute a general pull request or issue comment when a threaded reply is intended.
 - Before handling pull request review feedback, read `AGENTS.md` and follow the repository workflow rules.
 - When the user says they commented on a pull request (for example, "コメントした"), treat it as a request to inspect those review comments and reply directly in the corresponding GitHub review threads unless the user explicitly asks for an answer in chat instead.
-- Prefix AI-authored replies to GitHub review comments with `[AI]` so they are distinguishable from the user's comments when both use the same GitHub account.
+- Prefix all AI-authored GitHub text with `[AI]` so it is distinguishable from the user's work when both use the same GitHub account. This includes pull request titles/descriptions, issue titles/bodies, review comments/replies, general PR comments, and commit messages.
+- Group commits by meaningful change, not by file. A commit may contain multiple related files when they form one coherent implementation or documentation change.
+- Do not create one commit per file unless the files are genuinely independent changes.
 - Repository-rule-only changes may be committed and pushed directly to `main` when the user explicitly permits it. Otherwise, use the normal branch and pull request workflow.
 
 ## Documentation
