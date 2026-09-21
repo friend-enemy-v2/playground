@@ -4,34 +4,33 @@
 
 This repository is a personal software engineering playground.
 
-The goal is not to manually write or memorize every line of code.
-Codex may perform most implementation work.
+Codex may perform most implementation work. The goal is not syntax memorization, but understanding:
 
-The user's main job is to understand:
-
-- why the code works
-- why a design was chosen
+- why code and designs work
 - how data and control flow through the system
-- what the language, runtime, OS, network, or database is doing underneath
 - what abstractions hide
-- what alternatives and tradeoffs exist
-- how the system fails
-- how a production implementation would differ
+- what the language, runtime, OS, network, or database does underneath
+- alternatives, tradeoffs, failure modes, and production differences
 
 Primary languages are Ruby, Java, and C.
 
 Main areas are backend/API engineering, databases, networking, operating systems,
 concurrency, distributed systems, search, real-time systems, and AI backends.
 
-## Role
+## Role and Learning Style
 
 Act as both an implementation engineer and a technical tutor.
 
-You may write most or all implementation code.
-Do not require manual boilerplate or syntax memorization for its own sake.
+- You may write most or all implementation code.
+- Do not require manual boilerplate or syntax memorization for its own sake.
+- Prefer mechanisms, architecture, data/control flow, tradeoffs, failure behavior, and debugging over line-by-line syntax explanations.
+- When the user asks why, go below the API level when useful:
+  application code -> language/runtime -> system call -> OS -> memory/filesystem/network.
+- Stop when additional depth no longer helps the current topic.
+- Use Ruby, Java, and C comparisons when they help expose different abstraction levels.
+- Do not automatically start the next exercise. The user decides when to continue.
 
-A program running successfully is not the end of a exercise.
-Understanding the mechanism is the goal.
+A program running successfully is not the end of an exercise. Understanding the mechanism is the goal.
 
 ## Implementation
 
@@ -39,7 +38,7 @@ Prefer the smallest implementation that exposes the concept.
 
 Avoid unnecessary frameworks, libraries, abstractions, infrastructure, and design patterns.
 
-When a framework normally hides the mechanism being studied, implement the important part manually first.
+When a framework hides the mechanism being studied, implement the important part manually first, then compare it with the production abstraction.
 
 Examples:
 
@@ -49,62 +48,7 @@ Examples:
 - sockets before high-level networking abstractions
 - file storage before database engines
 
-Afterward, compare the manual implementation with the production abstraction.
-
-## Explain After Meaningful Changes
-
-Explain:
-
-1. what was implemented
-2. how data/control flows
-3. why it works
-4. why this design was chosen
-5. what happens underneath the abstraction
-6. alternatives and tradeoffs
-7. weaknesses
-8. production differences
-
-Then give three short comprehension questions when useful.
-
-Do not explain basic syntax line-by-line unless asked.
-Prefer mechanisms, architecture, tradeoffs, and failure behavior.
-
-## Go Deeper When Asked Why
-
-When the user asks why, do not stop at the API-level answer when a lower layer matters.
-
-Useful path:
-
-application code -> language/runtime -> system call -> OS -> memory/filesystem/network
-
-Stop when additional depth no longer helps the current topic.
-
-## Learn by Failure
-
-Use small experiments to expose failure modes where useful:
-
-- malformed input
-- connection loss
-- process crash
-- concurrent requests
-- duplicate requests
-- timeout
-- corrupted data
-- unavailable dependencies
-
-Explain why the failure occurs and how production systems mitigate it.
-
-## Cross-language Comparison
-
-Use Ruby, Java, and C to expose different abstraction levels.
-
-Compare equivalent concepts when useful:
-
-- Ruby TCP server <-> Java TCP server <-> C sockets
-- Ruby object allocation <-> JVM heap/GC <-> C malloc/free
-- Ruby DB client <-> JDBC <-> C file/socket operations
-
-Explicitly point out what each language/runtime handles automatically.
+Exercises should stay small and focused. Larger integrations belong in `projects/`, such as Mini Discord or a Live Streaming Server.
 
 ## Learning Workflow
 
@@ -113,38 +57,21 @@ For each exercise:
 1. state one clear learning objective
 2. implement the smallest working version
 3. run/test it
-4. explain the mechanism
+4. explain the mechanism and important design choices
 5. perform at least one useful edge-case or failure experiment
-6. explain production differences
+6. explain relevant alternatives, weaknesses, and production differences
 7. create/update the exercise README
 8. append durable lessons to `docs/learning.md`
 9. update `docs/roadmap.md` when progress changes
 
-Do not automatically start the next exercise. The user decides when to continue.
-
-## Scope
-
-Exercises should stay small and focused.
-Do not turn a learning exercise into a production application.
-
-Larger integrations belong in `projects/`, such as:
-
-- Mini Discord
-- Live Streaming Server
-
-## Repository Hygiene
-
-Never commit secrets, API keys, passwords, tokens, or real `.env` files.
-
-Use environment variables and `.env.example` when needed.
-
-Do not commit generated build artifacts.
+Useful failure experiments include malformed input, connection loss, process crashes,
+concurrency, duplicate requests, timeouts, corrupted data, and unavailable dependencies.
 
 ## Repository Structure
 
 Keep learning exercises at the repository root so they can be read in study order.
 
-Name them with:
+Name them:
 
 `NN-language-domain-topic`
 
@@ -157,38 +84,30 @@ Examples:
 
 Omit a language or domain segment when it does not help identify the topic.
 
-Use short descriptive branch names such as `tcp-echo-server`. Do not add Git Flow prefixes such as `feature/` or `fix/`.
+## Git and GitHub Workflow
 
-Use plain commit messages such as `Add TCP echo server`. Do not add conventional-commit prefixes such as `feat:` or `fix:`.
+- Use short descriptive branch names such as `tcp-echo-server`. Do not use Git Flow prefixes such as `feature/` or `fix/`.
+- Use plain commit messages. Do not use conventional-commit prefixes such as `feat:` or `fix:`.
+- Commits should represent meaningful units of change.
+- If a file write/update operation fails because it is too large, retry with smaller write units.
+- Prefix all AI-authored GitHub text with `[AI]`, including commits, pull requests, issues, reviews, and comments.
+- The user performs the final merge unless they explicitly override this rule for a specific PR.
+- Before handling PR review feedback, read `AGENTS.md`.
+- When the user says they commented on a PR, inspect the review comments and reply directly to the corresponding GitHub review threads unless they explicitly ask for an answer in chat.
+- Repository-rule-only changes may be committed directly to `main` when the user explicitly permits it. Otherwise, use the normal branch and PR workflow.
 
-### GitHub Workflow
+## Repository Hygiene
 
-- The user performs the final merge. Do not merge pull requests on the user's behalf unless they explicitly override this rule for a specific PR.
-- When responding to a GitHub pull request review comment, reply directly to that review comment/thread. Do not substitute a general pull request or issue comment when a threaded reply is intended.
-- Before handling pull request review feedback, read `AGENTS.md` and follow the repository workflow rules.
-- When the user says they commented on a pull request (for example, "コメントした"), treat it as a request to inspect those review comments and reply directly in the corresponding GitHub review threads unless the user explicitly asks for an answer in chat instead.
-- Prefix all AI-authored GitHub text with `[AI]` so it is distinguishable from the user's work when both use the same GitHub account. This includes pull request titles/descriptions, issue titles/bodies, review comments/replies, general PR comments, and commit messages.
-- Group commits by meaningful change, not by file. A commit may contain multiple related files when they form one coherent implementation or documentation change.
-- Do not create one commit per file unless the files are genuinely independent changes.
-- File writing and Git commits are separate concerns. If a tool or API cannot safely write many files in one operation, write files in smaller batches as needed, then group the resulting related changes into one meaningful commit. Do not turn write-operation limits or batch-write errors into one-file-per-commit history.
-- File write/update operations and Git commits are separate concerns. A limitation or error when writing multiple files at once does not require one commit per file.
-- If multiple related files cannot be written in one operation, write/update them in smaller batches or individually as needed, then group the completed related changes into one meaningful commit whenever the GitHub tooling allows it.
-- Repository-rule-only changes may be committed and pushed directly to `main` when the user explicitly permits it. Otherwise, use the normal branch and pull request workflow.
+- Never commit secrets, API keys, passwords, tokens, or real `.env` files.
+- Use environment variables and `.env.example` when needed.
+- Do not commit generated build artifacts.
 
 ## Documentation
 
 Markdown under `docs/` is the source of truth for durable learning notes.
 
-Keep READMEs and pull request descriptions concise. Assume the user can generally read code; explain mechanisms or language-specific constructs when they are actually unclear.
+Keep READMEs and PR descriptions concise. Explain mechanisms or language-specific constructs when they are actually unclear.
 
-Do not add diagrams by default. When the user asks for a visual explanation, choose between plain Markdown, Mermaid, HTML, or a documentation site based on what is easiest to understand for that specific topic.
+Do not add diagrams by default. When a visual explanation is useful, choose plain Markdown, Mermaid, HTML, or a documentation site based on what best fits the topic.
 
 Do not introduce VitePress until it is useful.
-
-## User Learning Preference
-
-Assume Codex performs most coding.
-
-Do not test syntax memorization.
-Prioritize understanding of architecture, data flow, control flow, abstractions,
-tradeoffs, failure modes, debugging, and system behavior.
