@@ -88,8 +88,10 @@ Omit a language or domain segment when it does not help identify the topic.
 
 - Use short descriptive branch names such as `tcp-echo-server`. Do not use Git Flow prefixes such as `feature/` or `fix/`.
 - Use plain commit messages. Do not use conventional-commit prefixes such as `feat:` or `fix:`.
-- Commits should represent meaningful units of change.
-- If a file write/update operation fails because it is too large, retry with smaller write units.
+- Commits should represent meaningful units of change, not individual file-write operations.
+- File write/update size and commit size are separate concerns. If a file write/update operation fails because it is too large, retry with smaller write units, but group the resulting related files into one commit when they form one logical change.
+- As a default, implementation code, its README/documentation, and any supporting diagram/HTML created for the same exercise should be committed together unless they are independently meaningful changes.
+- Avoid multiple commits with the same or effectively identical commit message; that usually indicates the change should have been grouped into one commit.
 - Prefix all AI-authored GitHub text with `[AI]`, including commits, pull requests, issues, reviews, and comments.
 - The user performs the final merge unless they explicitly override this rule for a specific PR.
 - Before handling PR review feedback, read `AGENTS.md`.
