@@ -24,8 +24,8 @@ Understand Ruby basics as needed rather than studying syntax separately for a lo
 - [x] 11 Spring Boot API
 - [ ] 12 Authentication / Spring Security
 - [ ] 13 Java Mini SNS
-- [ ] 14 Connection Pool Lab
-- [ ] 15 JVM / GC Lab
+- [ ] 14 Connection Pool
+- [ ] 15 JVM / GC
 
 Focus on static typing, JVM, GC, threads, concurrency, DI, and common backend architecture.
 
@@ -42,9 +42,9 @@ Questions to answer include: why indexes are fast, why WAL exists, what happens 
 
 ## Phase 4 - C / Systems
 
-- [ ] 22 Memory Lab
+- [ ] 22 Memory
 - [ ] 23 Simple Memory Allocator
-- [ ] 24 File I/O Lab
+- [ ] 24 File I/O
 - [ ] 25 TCP Server
 - [ ] 26 HTTP Server
 - [ ] 27 KV Database
@@ -70,7 +70,7 @@ Connect classic search to embeddings and later AI/RAG systems.
 - [ ] 37 Replicated KV Store
 - [ ] 38 Consistent Hashing / Sharding
 - [ ] 39 Leader Election
-- [ ] 40 Failure Lab
+- [ ] 40 Failure
 
 Study retries, timeouts, idempotency, replication, partitioning, consistency, and failure.
 
