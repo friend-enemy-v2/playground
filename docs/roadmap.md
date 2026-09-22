@@ -19,9 +19,9 @@ Understand Ruby basics as needed rather than studying syntax separately for a lo
 
 ## Phase 2 - Java / Backend Architecture
 
-- [ ] 09 REST API in Java
-- [ ] 10 Threaded HTTP Server
-- [ ] 11 Spring Boot API
+- [x] 09 REST API in Java
+- [x] 10 Threaded HTTP Server
+- [x] 11 Spring Boot API
 - [ ] 12 Authentication / Spring Security
 - [ ] 13 Java Mini SNS
 - [ ] 14 Connection Pool Lab
