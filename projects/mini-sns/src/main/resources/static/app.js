@@ -71,7 +71,33 @@ async function loadTimeline() {
         const body = document.createElement("div");
         body.textContent = post.body;
 
-        article.append(meta, body);
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const like = document.createElement("button");
+        like.textContent = "いいね";
+        like.onclick = () => run(async () => {
+            await api(`/api/posts/${post.id}/like`, {method: "PUT"});
+            status.textContent = "like OK";
+        });
+
+        const comment = document.createElement("button");
+        comment.textContent = "コメント";
+        comment.onclick = () => {
+            const commentBody = window.prompt("コメント");
+            if (!commentBody) return;
+
+            run(async () => {
+                await api(`/api/posts/${post.id}/comments`, {
+                    method: "POST",
+                    body: JSON.stringify({body: commentBody})
+                });
+                status.textContent = "comment OK";
+            });
+        };
+
+        article.append(meta, body, actions);
+        actions.append(like, comment);
         return article;
     }));
 }
