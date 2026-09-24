@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mini SNS</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main>
+    <h1>Mini SNS</h1>
+    <p class="sub">Spring Boot APIをブラウザから触るための最小UI</p>
+
+    <section id="auth">
+        <h2>Register / Login</h2>
+        <input id="username" placeholder="username">
+        <input id="displayName" placeholder="display name">
+        <input id="password" type="password" placeholder="password (8+)">
+        <div class="actions">
+            <button id="register">登録</button>
+            <button id="login">ログイン</button>
+            <button id="logout">ログアウト</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>Post</h2>
+        <textarea id="postBody" maxlength="500" placeholder="いまどうしてる？"></textarea>
+        <button id="post">投稿</button>
+    </section>
+
+    <section>
+        <h2>User relation</h2>
+        <input id="targetUser" placeholder="target username">
+        <div class="actions">
+            <button data-relation="follow" data-method="PUT">フォロー</button>
+            <button data-relation="follow" data-method="DELETE">解除</button>
+            <button data-relation="block" data-method="PUT">ブロック</button>
+            <button data-relation="block" data-method="DELETE">解除</button>
+            <button data-relation="mute" data-method="PUT">ミュート</button>
+            <button data-relation="mute" data-method="DELETE">解除</button>
+        </div>
+    </section>
+
+    <section>
+        <div class="heading">
+            <h2>Timeline</h2>
+            <button id="reload">更新</button>
+        </div>
+        <div id="timeline"></div>
+    </section>
+
+    <pre id="status"></pre>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
