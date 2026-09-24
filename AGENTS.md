@@ -40,14 +40,14 @@ Prefer the smallest implementation that exposes the concept.
 
 Avoid unnecessary frameworks, libraries, abstractions, infrastructure, and design patterns.
 
-Code must be optimized for mobile GitHub review:
+Write normal readable source code. Minification belongs to build/output steps when a project actually needs it, not to source code written for review.
 
-- never minify or compress normal source code into one line
-- one statement or logical step per line by default
-- split long method chains across lines
-- keep imports on separate lines
+- use normal formatting and line breaks
+- keep imports readable
 - prefer clear variable names over clever compact code
 - avoid horizontal scrolling where practical
+- long method chains may stay chained when that makes the flow easier to follow
+- when a chain or framework configuration is not self-explanatory, add a short comment explaining what that part configures
 - keep methods small enough that the main flow is obvious
 
 When a framework hides the mechanism being studied, implement the important part manually first, then compare it with the production abstraction.
@@ -70,23 +70,24 @@ For each exercise:
 2. implement the smallest readable working version
 3. run/test it
 4. explain the mechanism in simple Japanese
-5. perform at least one useful edge-case or failure experiment
-6. explain where this appears in production work and what problem it solves
-7. explain relevant alternatives, weaknesses, and production differences only as needed
-8. create/update the exercise README
-9. append durable lessons to `docs/learning.md`
-10. update `docs/roadmap.md` when progress changes
+5. include at least one realistic mistake developers can fall into when useful
+6. explain why that mistake causes a bug, failure, security problem, or operational problem
+7. explain where this appears in production work and what problem it solves
+8. explain relevant alternatives, weaknesses, and production differences only as needed
+9. create/update the exercise README
+10. append durable lessons to `docs/learning.md`
+11. update `docs/roadmap.md` when progress changes
 
-README explanations should normally answer these questions in this order:
+README explanations should normally answer these questions simply:
 
 - これは何？
 - コードは何をしている？
 - 実務ではどこで使う？
-- 知らないと何に困る？
+- よくあるミスは？
+- なぜそのミスが問題？
 - 次に何につながる？
 
-Useful failure experiments include malformed input, connection loss, process crashes,
-concurrency, duplicate requests, timeouts, corrupted data, and unavailable dependencies.
+Failure examples should prefer realistic mistakes over artificial code that exists only to throw an error.
 
 ## Repository Structure
 
@@ -132,7 +133,6 @@ Markdown under `docs/` is the source of truth for durable learning notes.
 Keep READMEs and PR descriptions concise. Explain mechanisms or language-specific constructs when they are actually unclear.
 
 Do not create HTML learning diagrams by default.
-Do not add diagrams merely because a topic is abstract.
 Prefer a short Markdown explanation and readable code.
 Use a diagram only when plain text cannot explain the relationship clearly, and keep it small enough to read on a phone.
 
