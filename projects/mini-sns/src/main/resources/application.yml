@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/minisns}
+    username: ${DB_USER:minisns}
+    password: ${DB_PASSWORD:minisns}
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+
+app:
+  jwt-secret: ${JWT_SECRET:change-me-change-me-change-me-change-me}
+  jwt-expiration-seconds: 3600
