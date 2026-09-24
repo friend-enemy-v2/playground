@@ -1,0 +1,34 @@
+package playground.pool;
+
+import com.zaxxer.hikari.HikariDataSource;
+import java.sql.Connection;
+
+// 学習用の「ありがちなミス」。
+// .example なので通常のビルド対象には入らない。
+class ConnectionLeakDemo {
+
+    void loadUser(HikariDataSource dataSource, int userId) throws Exception {
+        Connection connection = dataSource.getConnection();
+
+        if (userId <= 0) {
+            // 途中returnするとclose()まで到達しない。
+            // ConnectionはPoolへ返らず、貸出中のまま残る。
+            return;
+        }
+
+        // SQL処理がここにある想定。
+        // ここで例外が起きた場合も、下のclose()には到達しない。
+        connection.close();
+    }
+
+    void saferLoadUser(HikariDataSource dataSource, int userId) throws Exception {
+        // try-with-resourcesならreturnや例外でも自動でcloseされる。
+        try (Connection connection = dataSource.getConnection()) {
+            if (userId <= 0) {
+                return;
+            }
+
+            // SQL処理
+        }
+    }
+}
