@@ -1,33 +1,39 @@
 # 12 Authentication / Spring Security
 
-## Goal
-11で作ったAPIに「誰が使っているか」の境界を追加する。
+## これは何？
+APIの手前で「誰なのか」と「このAPIを使ってよいか」を確認する仕組み。
 
-今回は仕組みを小さく見るため **HTTP Basic + Spring Security** を使う。JWTは「資格情報を毎回送る」という点は似るが、署名付きtokenを検証する方式。まずFilter Chainを理解してからJWTへ進む方がSpring Securityの役割が見えやすい。
+- Authentication（認証）= あなたは誰？
+- Authorization（認可）= あなたはこれをしてよい？
 
-## Mental model
-リクエストはControllerへ直行しない。
+リクエストはControllerへ直行せず、先にSpring Securityを通る。
 
-Client → SecurityFilterChain → 認証OK? → Controller
+`Client → SecurityFilterChain → Controller`
 
-- Authentication: あなたは誰？
-- Authorization: あなたはこれをしてよい？
-- PasswordEncoder: passwordそのものではなくbcrypt hashで照合する
+## コードは何をしている？
+`/public` はログイン不要、`/me` はログイン必須にしている。
+
+SecurityConfigの長いチェーンは、左から順に「URLごとのルール → HTTP Basic → 設定完成」と読めばよい。
+
+## 実務ではどこで使う？
+ログイン必須API、管理者だけのAPI、本人だけが操作できる更新・削除など。
+
+## よくあるミス：公開範囲を広げすぎる
+`MistakeSecurityConfig.java.example` を参照。
+
+「public APIが増えたからまとめて許可しよう」と `/api/**` を `permitAll()` にすると、その配下に後から追加した管理APIまで認証なしで通る可能性がある。
+
+コード自体は正常に動くので気付きにくい。これは認証認可で特に危険な種類のバグ。
+
+**対策:** 公開するURLだけを狭く指定し、基本は `anyRequest().authenticated()` 側へ倒す。
+
+## 次に何につながる？
+JWT / Cookie Session / Role・権限管理 / OAuth・OIDC。
 
 ## Run
-Java 17+ / Maven。
-
 ```bash
 mvn spring-boot:run
 curl http://localhost:8080/public
 curl -i http://localhost:8080/me
 curl -u yuki:playground http://localhost:8080/me
 ```
-
-2つ目は401、3つ目はuser名を返す。
-
-## Failure experiment
-passwordをわざと間違える。Controllerにbreakpointを置くと、認証失敗時はControllerまで来ないことを確認できる。
-
-## Production difference
-サンプルなのでuserはメモリ固定。実運用ではDB、登録処理、権限、token/session、秘密情報管理などが必要。06 Ruby Login APIのJWT/Sessionと比較して「認証方式」と「Spring Securityという入口の仕組み」を分けて考える。
