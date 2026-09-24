@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: minisns
+      POSTGRES_USER: minisns
+      POSTGRES_PASSWORD: minisns
+    ports:
+      - "5432:5432"
+    volumes:
+      - minisns-postgres:/var/lib/postgresql/data
+volumes:
+  minisns-postgres:
