@@ -1,0 +1,23 @@
+package playground.jvm;
+
+import java.util.ArrayList;
+import java.util.List;
+
+// 学習用の「ありがちなミス」。
+// .example なので通常のビルド対象には入らない。
+class MemoryRetentionDemo {
+
+    // アプリが動いている間ずっと生きるList。
+    private static final List<byte[]> requestHistory = new ArrayList<>();
+
+    void handleRequest() {
+        byte[] requestData = new byte[1_000_000];
+
+        // 「調査用に履歴を残そう」などの理由で毎回追加。
+        // 件数上限も削除処理もない。
+        requestHistory.add(requestData);
+
+        // このmethodが終わっても、
+        // static ListからrequestDataへ到達できるのでGCは回収できない。
+    }
+}

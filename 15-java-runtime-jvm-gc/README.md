@@ -1,46 +1,38 @@
 # 15 JVM / GC
 
-## Goal
-Java objectが「どこにいて、いつゴミ扱いになるか」をイメージする。
+## これは何？
+Javaのobjectは主にHeapに置かれ、どこからも到達できなくなったobjectをGCが回収する。
 
-- JVM = Java bytecodeを実行する環境
-- Stack = method呼び出しごとの作業机
-- Heap = objectを置く共有の大きな部屋
-- Reference = objectへたどり着く手掛かり
-- GC = 到達できなくなったobjectのメモリを再利用可能にする仕組み
-- GC eligible = 回収してよい候補。即消えるという意味ではない
+`null` にした瞬間に削除されるわけではない。
+「もう到達できないので、GCが回収してよい候補になる」と考える。
 
-## Mental model
-```text
-Stack（作業机）             Heap（物置）
-user ───────────────────→ [User object]
-temporary ──────────────→ [5MB object]
+## コードは何をしている？
+一時objectへの強い参照を外し、GCの回収候補になる流れとHeap使用量を見る。
 
- temporary = null
-                           [5MB object]
-                           ↑ 強い参照から到達不能
-                           GCが後で回収可能
-```
+`System.gc()` はGCを依頼するだけで、即時回収を保証しない。
 
-変数をnullにした瞬間にGCが走るわけではない。
+## 実務ではどこで使う？
+Javaアプリのメモリ増加、OutOfMemoryError、GC負荷、長時間動かすサーバーの調査。
 
-## Javaが動くまで
-`.java → javac → .class(bytecode) → JVM → interpreter/JIT → CPU`
+## よくあるミス：使い終わったobjectを保持し続ける
+`MemoryRetentionDemo.java.example` を参照。
 
-JITは実行中にmachine codeへcompileして高速化する仕組み。
+「後で使うかもしれない」とstaticなListやMapへrequestデータやcacheを追加し続けるコードは普通に書ける。
 
-## Experiment
+処理自体は終わっていても、List → object という参照が残っているためGCから見るとまだ使用中。
+GCを何回動かしても回収できず、長時間運用するとHeapが増え続ける。
+
+これは「GCがあるからメモリ管理を考えなくてよい」が間違いだと分かる例。
+
+**対策:** 不要になった参照を長寿命Collectionへ残さない。cacheなら件数上限・期限・削除戦略を持たせる。
+
+## 次に何につながる？
+Heap dump / profiler / GC log / memory leak調査 / cache設計 / JVM tuning。
+
+## Run
 ```bash
 mvn compile
 java -Xms32m -Xmx32m -Xlog:gc -cp target/classes playground.jvm.GcDemo
 ```
 
-GC logとheap使用量を見る。数値やGCタイミングは実行ごとに変わり得る。
-
-## Failure experiment
-`kept` に入れるobjectを増やす。参照を保持しているobjectはGCが勝手に捨てられないので、小さい `-Xmx` の上限ではOutOfMemoryErrorになり得る。
-
-## Important
-`System.gc()` も即時GCの保証ではない。GCはファイル削除でもresource closeでもない。DB Connectionやfile handleはGC任せにせずcloseする。
-
-`jvm-gc.html` でStack / Heap / Reference / GCを図で確認できる。
+DB Connectionやfile handleはGC任せにせずcloseする。
