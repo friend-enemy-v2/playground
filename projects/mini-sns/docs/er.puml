@@ -1,0 +1,60 @@
+@startuml
+hide methods
+hide stereotypes
+
+entity users {
+  * id : bigint <<PK>>
+  --
+  username : varchar <<UK>>
+  display_name : varchar
+  bio : varchar
+  password_hash : varchar
+}
+
+entity posts {
+  * id : bigint <<PK>>
+  --
+  user_id : bigint <<FK>>
+  body : varchar
+}
+
+entity comments {
+  * id : bigint <<PK>>
+  --
+  post_id : bigint <<FK>>
+  user_id : bigint <<FK>>
+  body : varchar
+}
+
+entity likes {
+  * user_id : bigint <<PK,FK>>
+  * post_id : bigint <<PK,FK>>
+}
+
+entity follows {
+  * follower_id : bigint <<PK,FK>>
+  * followed_id : bigint <<PK,FK>>
+}
+
+entity blocks {
+  * blocker_id : bigint <<PK,FK>>
+  * blocked_id : bigint <<PK,FK>>
+}
+
+entity mutes {
+  * muter_id : bigint <<PK,FK>>
+  * muted_id : bigint <<PK,FK>>
+}
+
+users ||--o{ posts
+users ||--o{ comments
+posts ||--o{ comments
+users ||--o{ likes
+posts ||--o{ likes
+users ||--o{ follows : follower
+users ||--o{ follows : followed
+users ||--o{ blocks : blocker
+users ||--o{ blocks : blocked
+users ||--o{ mutes : muter
+users ||--o{ mutes : muted
+@enduml
